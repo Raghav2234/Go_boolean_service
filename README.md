@@ -1,7 +1,13 @@
 # Go_boolean_service
 > The role of this service is to create, delete and update boolean values.
-## Installation
-## 
+## Run
+### Docker
+``` bash
+```
+### GoLang
+``` bash
+  go 
+```
 
 ## API
 ### HTTP
