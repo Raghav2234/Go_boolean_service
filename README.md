@@ -60,3 +60,6 @@ After authentication with token, deletes the boolean corresponding to the given 
   curl -X DELETE http://localhost:8080/"0e7aba578a6d-bc3d-9066-eaf5ec13e126" 
   --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6InNpZ25pbl8xIiwidHlwIjoiSldUIn0.eyJleHAiOjE2MDA4ODM4NTUsImlkIjoiMGU3YWJhNTc4YTZkLWJjM2QtOTA2Ni1lYWY1ZWMxM2UxMjYifQ.x1bjQdauu0FzBNBrubmsnJQRDQKEuHHH-cTLxovYxeE"
 ```
+```bash
+  HTTP 204 No Content
+```
