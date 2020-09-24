@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	serverSetup().Run()
+}
+func serverSetup() *gin.Engine {
 	database, err := db.CreateConnection()
 	if err != nil {
 		panic("Database not connected")
@@ -17,5 +20,5 @@ func main() {
 	r.POST("/", controllers.CreateBoolean(database))
 	r.PATCH("/:id", controllers.UpdateBoolean(database))
 	r.DELETE("/:id", controllers.DeleteBoolean(database))
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	return r // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
