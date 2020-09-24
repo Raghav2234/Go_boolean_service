@@ -16,6 +16,6 @@ func DeleteBoolean(database *gorm.DB) func(*gin.Context) {
 		}
 		ID := c.Param("id")
 		db.DeleteBoolean(database, ID)
-		c.JSON(http.StatusNoContent, gin.H{"value": "No content found"})
+		c.String(http.StatusNoContent, "HTTP 204 No Content")
 	}
 }
