@@ -11,7 +11,11 @@ import (
 
 //Boolean is orm for Bool objects
 type Boolean struct {
-	Id    string `json:"id" gorm:"primary_key"`
+	Id    string ` gorm:"primary_key"`
+	Key   string
+	Value bool
+}
+type BooleanTemp struct {
 	Key   string `json:"key"`
 	Value bool   `json:"value"`
 }
@@ -25,6 +29,7 @@ func CreateConnection() (*gorm.DB, error) {
 	// Migrate the schema
 	fmt.Println("Database successfully connected")
 	db.AutoMigrate(&Boolean{})
+
 	return db, nil
 }
 
@@ -34,16 +39,16 @@ func createUUID() string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	uuid := fmt.Sprintf("%x-%x-%x-%x-%x",
+	uuid := fmt.Sprintf("%x%x-%x-%x-%x",
 		b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
 	return uuid
 }
 
 //CreateBoolean creates the boolean object
-func CreateBoolean(db *gorm.DB, KEY string, VALUE bool) Boolean {
+func CreateBoolean(db *gorm.DB, obj BooleanTemp) Boolean {
 	// Create
 	ID := createUUID()
-	boolObj := Boolean{Id: ID, Key: KEY, Value: VALUE}
+	boolObj := Boolean{Id: ID, Key: obj.Key, Value: obj.Value}
 	db.Create(&boolObj)
 	return boolObj
 }
@@ -51,19 +56,22 @@ func CreateBoolean(db *gorm.DB, KEY string, VALUE bool) Boolean {
 //ReadBoolean reads the boolean from the database using Id field
 func ReadBoolean(db *gorm.DB, ID string) Boolean {
 	var boolObj Boolean
-	db.First(&boolObj, ID)
+	// db.First(&boolObj, ID)
+	db.Where("id = ?", ID).First(&boolObj)
 	return boolObj
 }
 
 //UpdateBoolean updates the boolean parameters
-func UpdateBoolean(db *gorm.DB, ID string, KEY string, VALUE bool) {
+func UpdateBoolean(db *gorm.DB, ID string, obj BooleanTemp) {
 	var boolObj Boolean
-	db.First(&boolObj, ID)
-	db.Model(&boolObj).Updates(Boolean{Key: KEY, Value: VALUE}) // non-zero fields
+	db.Where("id = ?", ID).First(&boolObj)
+	db.Model(&boolObj).Updates(Boolean{Key: obj.Key, Value: obj.Value})
+
 }
 
 //DeleteBoolean deletes the boolean entry identified by Id
 func DeleteBoolean(db *gorm.DB, ID string) {
-	db.Delete(&Boolean{}, ID)
+	// db.Delete(&Boolean{}, ID)
+	db.Where("id = ?", ID).Delete(&Boolean{})
 
 }
