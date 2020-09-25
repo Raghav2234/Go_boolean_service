@@ -16,12 +16,12 @@
 Create a boolean and return authentication token.
 ```bash
   curl -X POST http://localhost:8080  
-  --header "Content-Type: application/json" --data '{"value": true, "key": "bool_1"}'
+  --header "Content-Type: application/json" --data '{"value": true, "key": "bool_key"}'
 ```
 ```bash
   {
   "id":"0e7aba578a6d-bc3d-9066-eaf5ec13e126",
-  "key":"bool_1",
+  "key":"bool_key",
   "token":"eyJhbGciOiJIUzI1NiIsImtpZCI6InNpZ25pbl8xIiwidHlwIjoiSldUIn0.eyJleHAiOjE2MDA4ODM4NTUsImlkIjoiMGU3YWJhNTc4YTZkLWJjM2QtOTA2Ni1lYWY1ZWMxM2UxMjYifQ.x1bjQdauu0FzBNBrubmsnJQRDQKEuHHH-cTLxovYxeE",
   "value":true
   }
@@ -35,7 +35,7 @@ After authentication with token return the boolean with corresponding **ID**
 ```bash
   {
   "id":"0e7aba578a6d-bc3d-9066-eaf5ec13e126",
-  "key":"bool_1",
+  "key":"bool_key",
   "value":true
   }
 ```
@@ -49,7 +49,7 @@ curl -X PATCH http://localhost:8080/[id]
   
   curl -X PATCH http://localhost:8080/"0e7aba578a6d-bc3d-9066-eaf5ec13e126" 
   --header "Content-Type: application/json" 
-  --data '{"value": true, "key": "new_bool"}' 
+  --data '{"value": true, "key": "bool_newKey"}' 
   --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6InNpZ25pbl8xIiwidHlwIjoiSldUIn0.eyJleHAiOjE2MDA4ODM4NTUsImlkIjoiMGU3YWJhNTc4YTZkLWJjM2QtOTA2Ni1lYWY1ZWMxM2UxMjYifQ.x1bjQdauu0FzBNBrubmsnJQRDQKEuHHH-cTLxovYxeE"
 ```
 ```bash
