@@ -9,17 +9,6 @@ import (
 	"gorm.io/gorm"
 )
 
-//Boolean is orm for Bool objects
-type Boolean struct {
-	Id    string ` gorm:"primary_key"`
-	Key   string
-	Value bool
-}
-type BooleanTemp struct {
-	Key   string `json:"key"`
-	Value bool   `json:"value"`
-}
-
 //CreateConnection creates the database connection
 func CreateConnection() (*gorm.DB, error) {
 	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
@@ -33,7 +22,8 @@ func CreateConnection() (*gorm.DB, error) {
 	return db, nil
 }
 
-func createUUID() string {
+//CreateUUID creates UUID
+func CreateUUID() string {
 	b := make([]byte, 16)
 	_, err := rand.Read(b)
 	if err != nil {
@@ -45,10 +35,9 @@ func createUUID() string {
 }
 
 //CreateBoolean creates the boolean object
-func CreateBoolean(db *gorm.DB, obj BooleanTemp) Boolean {
+func CreateBoolean(db *gorm.DB, boolObj Boolean) Boolean {
 	// Create
-	ID := createUUID()
-	boolObj := Boolean{Id: ID, Key: obj.Key, Value: obj.Value}
+	// ID := createUUID()
 	db.Create(&boolObj)
 	return boolObj
 }
