@@ -2,7 +2,13 @@
 > The role of this service is to create, delete and update boolean values.
 ## Installation
 ### Docker
+To create docker image 
 ``` bash
+  docker build -t image-name 
+```
+To run docker container
+```bash
+  docker run -p 8080:8080 image-name
 ```
 ### Source
   To build the app from source code. In main folder use :
