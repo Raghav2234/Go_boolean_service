@@ -3,7 +3,6 @@ package controllers
 import (
 	"Go_boolean_service/auth"
 	"Go_boolean_service/db"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,18 +10,20 @@ import (
 )
 
 //CreateBoolean creates the boolean provided key-value pair and returns the identifier(ID)
-func CreateBoolean(database *gorm.DB) func(*gin.Context) {
+func CreateBoolean(database *gorm.DB, jobChan chan db.Boolean) func(*gin.Context) {
 	return func(c *gin.Context) {
-		var boolObj db.BooleanTemp
-		if err := c.ShouldBindJSON(&boolObj); err != nil {
+		var obj db.BooleanTemp
+		if err := c.ShouldBindJSON(&obj); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-
-		resp := db.CreateBoolean(database, boolObj)
-		token, _ := auth.GenerateAccessToken(resp.Id)
-		obj := db.ReadBoolean(database, resp.Id)
-		fmt.Println(obj.Id, obj.Key, obj.Value)
-		c.JSON(http.StatusOK, gin.H{"token": token, "id": resp.Id, "key": resp.Key, "value": resp.Value})
+		ID := db.CreateUUID()
+		boolObj := db.Boolean{Id: ID, Key: obj.Key, Value: obj.Value}
+		jobChan <- boolObj
+		// resp := db.CreateBoolean(database, boolObj)
+		token, _ := auth.GenerateAccessToken(ID)
+		// obj := db.ReadBoolean(database, resp.Id)
+		// fmt.Println(obj.Id, obj.Key, obj.Value)
+		c.JSON(http.StatusOK, gin.H{"token": token, "id": ID, "key": boolObj.Key, "value": boolObj.Value})
 	}
 }
