@@ -11,10 +11,14 @@ To run docker container
   docker run -p 8080:8080 image-name
 ```
 ### Source
-  To build the app from source code. In main folder use :
+  To build the app locally. In main folder use :
 ``` bash
     go build .
 ```
+  To run the app
+  ```bash
+    ./Go_booleab_service
+  ```
 
 ## API
 ### HTTP
