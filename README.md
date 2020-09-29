@@ -4,14 +4,17 @@
 ### Docker
 To create docker image 
 ``` bash
-  docker build -t image-name 
+  docker build -t Go-boolean 
 ```
 To run docker container
 ```bash
-  docker run -p 8080:8080 image-name
+  docker run -p 8080:8080 Go-boolean
 ```
 ### Source
   To build the app locally. In root directory use :
+  ```bash
+    go mod download
+  ```
 ``` bash
     go build .
 ```
