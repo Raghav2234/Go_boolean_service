@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"Go_boolean_service/db"
+	"Go_boolean_service/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,7 +11,7 @@ import (
 
 //UpdateBoolean updates the boolean value after Authorisation with token and given valid ID
 func UpdateBoolean(database *gorm.DB) func(*gin.Context) {
-	var boolObj db.BooleanTemp
+	var boolObj models.BooleanTemp
 	return func(c *gin.Context) {
 		if AuthCheck(c) {
 			return
