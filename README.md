@@ -1,5 +1,5 @@
 # Go_boolean_service
-> The role of this service is to create, delete and update boolean values.
+> The role of this service is to create, delete and update boolean values with tokenization.
 ## Installation
 ### Docker
 To create docker image 
