@@ -1,22 +1,23 @@
 # Go_boolean_service
 > The role of this service is to create, delete and update boolean values with tokenization.
 ## Installation
-### Docker
+### Docker(locally)
 To create docker image 
 ``` bash
-  docker build -t Go-boolean 
+  docker build -t go-boolean 
 ```
 To run docker container
 ```bash
-  docker run -p 8080:8080 Go-boolean
+  docker run -p 8080:8080 go-boolean -e DOCK_USR= -e DOCK_PASS=_ -e DOCK_DB=_ -e DOCK_PORT= _
 ```
+
 ### Source
   To build the app locally. In root directory use :
   ```bash
     go mod download
   ```
 ``` bash
-    go build .
+  go build .
 ```
   To run the app
   ```bash
