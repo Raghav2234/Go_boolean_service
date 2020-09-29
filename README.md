@@ -4,7 +4,7 @@
 ### Docker(locally)
 To create docker image 
 ``` bash
-  docker build -t go-boolean 
+  docker build . -t go-boolean 
 ```
 To run docker container
 ```bash
