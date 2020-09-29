@@ -8,9 +8,15 @@ To create docker image
 ```
 To run docker container
 ```bash
-  docker run -p 8080:8080 go-boolean -e DOCK_USR= -e DOCK_PASS=_ -e DOCK_DB=_ -e DOCK_PORT= _
+  docker run -p 8080:8080 go-boolean -e DOCK_USR=_ -e DOCK_PASS=_ -e DOCK_DB=_ -e DOCK_PORT= _
 ```
-
+### Docker(from DockerHub)
+```bash
+  docker pull raghavtayal/go-boolean
+```
+```bash
+  docker run -p 8080:8080 raghavtayal/go-boolean -e DOCK_USR=_ -e DOCK_PASS=_ -e DOCK_DB=_ -e DOCK_PORT= _
+```
 ### Source
   To build the app locally. In root directory use :
   ```bash
