@@ -1,26 +1,13 @@
 package db
 
 import (
+	"Go_boolean_service/models"
 	"crypto/rand"
 	"fmt"
 	"log"
 
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
-
-//CreateConnection creates the database connection
-func CreateConnection() (*gorm.DB, error) {
-	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
-	if err != nil {
-		return nil, err
-	}
-	// Migrate the schema
-	fmt.Println("Database successfully connected")
-	db.AutoMigrate(&Boolean{})
-
-	return db, nil
-}
 
 //CreateUUID creates UUID
 func CreateUUID() string {
@@ -35,7 +22,7 @@ func CreateUUID() string {
 }
 
 //CreateBoolean creates the boolean object
-func CreateBoolean(db *gorm.DB, boolObj Boolean) Boolean {
+func CreateBoolean(db *gorm.DB, boolObj models.Boolean) models.Boolean {
 	// Create
 	// ID := createUUID()
 	db.Create(&boolObj)
@@ -43,24 +30,24 @@ func CreateBoolean(db *gorm.DB, boolObj Boolean) Boolean {
 }
 
 //ReadBoolean reads the boolean from the database using Id field
-func ReadBoolean(db *gorm.DB, ID string) Boolean {
-	var boolObj Boolean
+func ReadBoolean(db *gorm.DB, ID string) models.Boolean {
+	var boolObj models.Boolean
 	// db.First(&boolObj, ID)
 	db.Where("id = ?", ID).First(&boolObj)
 	return boolObj
 }
 
 //UpdateBoolean updates the boolean parameters
-func UpdateBoolean(db *gorm.DB, ID string, obj BooleanTemp) {
-	var boolObj Boolean
+func UpdateBoolean(db *gorm.DB, ID string, obj models.BooleanTemp) {
+	var boolObj models.Boolean
 	db.Where("id = ?", ID).First(&boolObj)
-	db.Model(&boolObj).Updates(Boolean{Key: obj.Key, Value: obj.Value})
+	db.Model(&boolObj).Updates(models.Boolean{Key: obj.Key, Value: obj.Value})
 
 }
 
 //DeleteBoolean deletes the boolean entry identified by Id
 func DeleteBoolean(db *gorm.DB, ID string) {
 	// db.Delete(&Boolean{}, ID)
-	db.Where("id = ?", ID).Delete(&Boolean{})
+	db.Where("id = ?", ID).Delete(&models.Boolean{})
 
 }
