@@ -6,19 +6,21 @@ import (
 	"Go_boolean_service/queue"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 func main() {
-	serverSetup().Run()
-}
-func serverSetup() *gin.Engine {
 	database, err := db.CreateConnection()
-
-	jobChan := queue.MessageQueue(database)
-
 	if err != nil {
 		panic("Database not connected")
 	}
+	serverSetup(database).Run()
+
+}
+func serverSetup(database *gorm.DB) *gin.Engine {
+
+	jobChan := queue.MessageQueue(database)
+
 	r := gin.Default()
 	r.GET("/:id", controllers.GetBoolean(database))
 	r.POST("/", controllers.CreateBoolean(database, jobChan))
